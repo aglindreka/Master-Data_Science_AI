@@ -1,0 +1,161 @@
+A text file (.txt) containing your SPARQL queries implementing the targeted functionalities:
+
+#############################################################################################################################
+I will try to use all the query/property that we have seen in the lesson. Quering the targeted functionalities                                                                          ##
+#############################################################################################################################
+
+Query 1:
+-SELECT query to find all the properties of Aglind.
+select * where {<http://ns.uca.fr/humans/data#Aglind> ?p ?t.}  ##p is for the property, t for the type
+-------------------------------------------------------------------------------------------------------------------------------------------
+Query 2:
+-Gives to me the description of Aglind, also with the graph.
+describe <http://ns.uca.fr/humans/data#Aglind>
+-------------------------------------------------------------------------------------------------------------------------------------------
+Query 3:
+#This query to retrieve all persons that are part of the Stars team (Only the reserchers, not students).
+select * where { ?x rdf:type :Person; :researchTeam ?resercher filter (?resercher = d:Stars)}
+------------------------------------------------------------------------------------------------------------------------------------------
+Query 4:
+#This query to retrieve all persons whose age is greater than 30 or is part of team Argos.
+
+SELECT ?person ?age ?researcher
+WHERE {
+  ?person a :Person .
+  OPTIONAL { ?person :yearsOld ?age FILTER (?age > 30)}
+  OPTIONAL{?person :researchTeam  ?researcher FILTER (?researcher = d:Argos)}
+  FILTER (BOUND(?age) || BOUND(?researcher))
+}
+-----------------------------------------------------------------------------------------------------------------------------------------
+Query 5:
+#This query to retrieve all persons that don't have an inteship team, like only the student have it, in the result I don't see only the students
+select ?person where {?person a :Person . Minus {?person :intershipTeam ?intership}}
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+Query 6:
+#I will write a query that indicates for each person if her age is even (true or false).
+select * where {?person a :Person; 
+:yearsOld ?age 
+BIND(IF((STRENDS(STR(xsd:decimal(?age)/2),".5")), "odd", "even") AS ?even)
+} 
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+Query 7:  
+##I will write a query to retrive every student that age is less than 28 and his/her name is not "Yannik", her teacher is Diane and his friend in Danish.
+## In the results I see only Martin
+select * where {?x a :Student; :name ?name; :yearsOld ?age; :hasTeacher ?teacher; :hasFriend ?friend.
+filter (?name != "Yannik" && ?age < 28 && ?teacher = d:Diane && ?friend = d:Danish)}
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+Query 8:  "I will use contruct and insert" Construct returns a new RDF graph!
+#I construct student has teacher profesor when it finds that student has friend student2 and this student has teacher professor, I construct student1 has professor 
+#this teacher
+construct { ?student :hasTeacher ?professor }
+where { ?student :hasFriend ?student2 . ?student2  :hasTeacher ?professor }
+
+#Insert
+insert { ?student :hasTeacher ?professor }
+where { ?student :hasFriend ?student2 . ?student2  :hasTeacher ?professor }
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+Query 9: 
+#I will choose and edit one of the SELECT WHERE queries previously written to transform them into a
+#CONSTRUCT WHERE query (retaining the same WHERE clause) in order to visualize the results as a graph.
+
+construct {?x :yearsOld ?age} where {?x a :Student; :name ?name; :yearsOld ?age; :hasTeacher ?teacher; :hasFriend ?friend.
+filter (?name != "Yannik" && ?age < 28 && ?teacher = d:Diane && ?friend = d:Danish)}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Query 10:
+
+construct {
+?student rdfs:seeAlso ?professor.   ##it creates a relationship between student and professor
+}where{
+   ?student   :hasTeacher ?professor.
+   ?professor :hasStudent ?student .
+filter(?student != ?professor)
+}
+
+#insert
+
+insert {
+?student rdfs:seeAlso ?professor. 
+}where{
+   ?student   :hasTeacher ?professor.
+   ?professor :hasStudent ?student .
+filter(?student != ?professor)
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------
+Query 11:
+#I will visualize the resources connected by seeAlso (using the CONSTRUCT clause).
+construct {
+            ?student rdfs:seeAlso ?professor.  ###we create a relation
+}where {
+           ?student rdfs:seeAlso ?professor.  
+}
+
+#select
+select *  where{
+        ?student rdfs:seeAlso ?professor.
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------
+Query 12:
+#I will take the director with more years carrier
+select *  where{
+        ?director :carrierYears ?carrier.
+} order by desc(?carrier) limit 1
+
+#the avarage of the carrierYears
+
+select ?carrier (avg(?carrier) as ?avg)  where{
+        ?director :carrierYears ?carrier.}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+Query 13:
+#here I will insert a new class and after a select to see the class inserted
+insert data {
+d:WebOfData rdf:type  :Class ;
+    :teacher d:Catherine;
+    :classStudent d:Aglind, d:Martin, d:Paul;
+    :hoursPerWeek 6;
+    :campusPlace d:SophiaTechCampus.
+}
+
+select * where{
+?class a :Class.
+filter(?class = d:WebOfData)
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------
+##################################
+#Now I will Query the schema itself      #
+##################################
+----------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------
+Query 14:
+
+#I will start with writing a query to find all the classes of the ontology and subClassOf in the ontology. 
+#I will reset and load the schema.
+
+select * where{?class rdf:type  rdfs:Class}
+select * where{?subClass rdfs:subClassOf  ?class}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+Query 15:
+#I will write a query  to find the definitions and translations of Campus
+ select * where{:Campus rdfs:label ?x; rdfs:comment ?y. 
+filter (lang(?x) = lang(?y))
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Query 16:
+#I will write a query to find the properties/classes that in the comment have the word "student"?
+select * where{?a rdfs:comment ?y
+              filter (contains (?y, "student"))
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Query 17:
+
+#I will write a query  to find the different meaning of the term "Director" in english
+select * where{?x rdfs:label "Director"@en;  rdfs:comment ?y filter (lang(?y) = "en")
+}

@@ -1,0 +1,254 @@
+@prefix : <http://ns.uca.fr/humans/schema#> .
+@prefix  d: <http://ns.uca.fr/humans/data#> .
+#@prefix  rdf: <http://www.w3.org/1999/02/22- rdf-syntax-ns#> .
+#@prefix rdf: <http://www.w3.org/2000/01/ rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+#==============================================#
+# =========  Directors of the Masters  ========#
+#==============================================#
+
+ d:Michel_Riveill rdf:type :Person, :Professor, :Director, :Researcher, :Man;
+    :paperPublication 30;
+    :nationality "France";
+    :decideCourseTeachers  d:Marco,  d:Silvia;
+    :acceptedStudents  d:Aglind, d:Anjana;
+    :yearsOld 65;
+    :carrierYears 40;
+    :courseTeaches "Deep Learning";
+    :MasterDirector "Data Science and Artificial Intelligence";
+    :name "Michel Riveill" ;
+    :researchTeam d:Stars.
+
+  d:Paul_HOFMAN rdf:type :Person, :Professor, :Director, :Researcher, :Man;
+    :paperPublication 25;
+    :nationality "Germany";
+    :decideCourseTeachers   d:Diane, d:Wickler;
+    :acceptedStudents  d:Yannik, d:Danish;
+    :yearsOld 70;
+    :carrierYears 35;
+    :courseTeaches "Complex Data Management";
+    :MasterDirector "MSc Biobanks & Complex Data Management";
+    :name "Paul HOFMAN" ;
+    :researchTeam d:Agros. 
+
+  d:Ingrid_Bethus rdf:type :Person, :Professor, :Director, :Woman;
+    :paperPublication 32;
+    :nationality "France";
+    :decideCourseTeachers   d:Wickler, d:Marco;
+    :acceptedStudents  d:Martin, d:Paul;
+    :yearsOld 50;
+    :carrierYears 20;
+    :courseTeaches "Cognitive Systems";
+    :MasterDirector "MSC Modelling Of Neuronal And Cognitive Systems";
+    :name "Ingrid_Bethus" .
+
+
+#=============================================#
+# =========  Masters Administrative  =========#
+#=============================================#
+ d:Lea_Hollander rdf:type :Person, :Coordinator, :Woman ;
+    :yearsOld 27;
+    :nationality "France";
+    :hasDirector  d:Michel_Riveill ;
+    :teacherCoordinator d:Silvia, d:Marco, d:Diane;
+    :coordinatorMaster3IA "Data Science and Artificial Inteligence", "3IA - INTERDISCIPLINARY INSTITUTE FOR ARTIFICIAL INTELLIGENCE";
+    :masterCountryGratuate "Greece";
+    :name "Lea Hollander" .
+
+d:Aurelia rdf:type :Person, :Accountant, :Woman ;
+    :yearsOld 35;
+    :nationality "France";
+    :hasDirector  d:Michel_Riveill ;
+    :masterAccountant "Data Science and Artificial Inteligence", "MSC Modelling Of Neuronal And Cognitive Systems";
+    :name "Aurelia" .
+   
+d:Laura rdf:type :Person, :Administration, :Woman ;
+    :yearsOld 56;
+    :nationality "France";
+    :hasDirector  d:Michel_Riveill, d:Paul_HOFMAN ;
+    :masterAdministration "Data Science and Artificial Inteligence", "MSC Modelling Of Neuronal And Cognitive Systems", "MSC Biobanks & Complex Data Managment";
+    :name "Laura" .
+
+d:Gabriele rdf:type :Person, :humanResources, :Man ;
+    :yearsOld 32;
+    :nationality "Italy";
+    :hasDirector  d:Michel_Riveill ;
+    :name "Gabriele" .
+
+
+
+#=======================================##
+# =========  Master Structures  =========#
+#=======================================##
+
+d:SophiaTechLibrery rdf:type  :Library ;
+    :campusOfLibrery d:SophiaTechCampus;
+    :studentsPlaces 150 ;
+    :OpeningHours "8h-18H" ;
+    :activities d:LanguageExchange.
+
+d:LanguageExchange rdf:type  :ActivityExtra;
+     :place "Sophia Antepolis";
+     :activityPlace  d:SophiaTechLibrery.
+
+d:SophiaTechCampus rdf:type :Campus;
+   :place "Sophia Antepolis";
+   :specialization "Ingegnery School";
+   :nbStudentOnCampus 5000;
+   :onTheCampus d:SophiaTechLibrery;
+   :activities d:LanguageExchange;
+   :MasterProgram "Data Science and Artificial Intelligence".
+
+d:ValroseCampus rdf:type :Campus;
+   :place "Nice";
+   :specialization "Science and Ingegnery School";
+   :nbStudentOnCampus 10000;
+   :MasterProgram "MSC Modelling Of Neuronal And Cognitive Systems", "MSC Biobanks & Complex Data Managment".
+
+
+#=======================================#
+# =========  Masters Professours  =========#
+#=======================================#
+
+ d:Silvia rdf:type :Person, :Professor, :Researcher, :Woman ;
+    :paperPublication 3;
+    :nationality "Italy";
+    :hasDirector d:Michel_Riveill;
+    :yearsOld 36 ;
+    :hasCollegue  d:Marco, d:Diane, d:Michel_Riveill;
+    :hasStudent   d:Anjana, d:Aglind, d:Martin ;
+    :name "Silvia" ;
+    :masterCountryGratuate "Italy";
+    :courseTeaches "R Programming" ;
+    :researchTeam d:Stars.
+
+ d:Diane rdf:type :Person, :Professor, :Researcher, :Woman ;
+    :yearsOld 55 ;
+    :nationality "France";
+    :hasDirector d:Paul_HOFMAN;
+    :hasCollegue  d:Paul_HOFMAN, d:Marco, d:Silvia ;
+    :hasStudent d:Paul, d:Aglind, d:Martin, d:Yannik ;
+    :masterCountryGratuate "France";
+    :name "Diane" ;
+    :courseTeaches "Machine Learning" ;
+    :researchTeam d:Agros.
+
+#================================#
+# =========  Reserchers  ========#
+#================================#
+ d:Marco rdf:type :Person, :Researcher, :Professor, :Man ;
+    :paperPublication 7;
+    :nationality "Italy";
+    :hasDirector d:Michel_Riveill, d:Ingrid_Bethus;
+    :hasCollegue  d:Silvia, d:Diane, d:Ingrid_Bethus,  d:Michel_Riveill; 
+    :hasStudents   d:Paul, d:Aglind, d:Martin, d:Yannik, d:Danish ;
+    :yearsOld 40;
+    :name "Marco" ;
+    :Lab "Inria";
+    :masterCountryGratuate "Italy";
+    :courseTeaches "Model Selection";
+    :ResearchSubject "Mathmatic and Statistic with machile learning";
+    :researchTeam d:Stars.
+
+
+
+ d:Wickler rdf:type :Person, :Researcher, :Man ;
+    :yearsOld 40 ;
+    :nationality "Brasil";
+    :hasDirector d:Paul_HOFMAN, d:Ingrid_Bethus;
+    :hasCollegue  d:Paul_HOFMAN, d:Ingrid_Bethus, d:Silvia ;
+    :hasStudent d:Paul, d:Martin, d:Yannik ;
+    :masterCountryGratuate "France";
+    :Lab "Sophia Tech";
+    :name "Diane" ;
+    :courseTeaches "Web of data" ;
+    :ResearchSubject "Data Learning";
+    :researchTeam d:Agros.
+
+
+
+
+#=====================================#
+# =========  Team Reserchers  ========#
+#=====================================#
+
+d:Stars rdf:type :TeamResearchGroup ;
+    :researcherNumber 3;
+    :campusPlace d:SophiaTechCampus;
+    :researcherMember d:Marco, d:Silvia, d:Michel_Riveill;
+    :intershipStudents d:Aglind, d:Paul.
+
+d:Agros rdf:type :TeamResearchGroup ;
+    :researcherNumber 3;
+    :campusPlace d:ValroseCampus;
+    :researcherMember d:Wickler, d:Diane, d:Paul_HOFMAN;
+    :intershipStudents d:Danish, d:Yannik.
+    
+
+   
+
+
+
+
+#================================#
+# =========  Students  ==========#
+#================================#
+ d:Aglind rdf:type :Person, :Student, :Man ;
+    :yearsOld 30 ;
+    :nationality "Albania";
+    :hasFriend  d:Paul, d:Yannik ;
+    :hasTeacher d:Michel_Riveill, d:Silvia, d:Diane ;
+    :masterInProgress "M1";
+    :name "Aglind";
+    :MasterProgram "Data Science and Artificial Intelligence";
+    :intershipTeam d:Stars.
+   
+ d:Anjana rdf:type :Person, :Student, :Woman ;
+    :yearsOld 25 ;
+    :nationality "India";
+    :hasFriend  d:Paul, d:Danish ;
+    :hasTeacher d:Michel_Riveill, d:Silvia ;
+    :masterInProgress "M1";
+    :name "Anjana";
+    :MasterProgram "Data Science and Artificial Intelligence".
+
+ d:Paul rdf:type :Person, :Student, :Man ;
+    :yearsOld 22 ;
+    :nationality "France";
+    :hasFriend  d:Aglind, d:Martin, d:Anjana ;
+    :hasTeacher d:Marco, d:Ingrid_Bethus, d:Wickler ;
+    :name "Paul" ;
+    :MasterProgram "MSC Modelling Of Neuronal And Cognitive Systems";
+    :intershipTeam d:Stars.
+
+ d:Danish rdf:type :Person, :Student, :Man ;
+    :yearsOld 26 ;
+    :nationality "India";
+    :hasFriend  d:Martin, d:Anjana ;
+    :hasTeacher  d:Marco, d:Paul_HOFMAN ;
+    :name "Danish" ;
+    :MasterProgram "MSc Biobanks & Complex Data Management";
+    :intershipTeam d:Agros.
+
+ d:Martin rdf:type :Person, :Student, :Man ;
+    :yearsOld 25;
+    :nationality "Armenia";
+    :hasFriend  d:Danish, d:Yannik, d:Paul;
+    :hasTeacher d:Ingrid_Bethus, d:Marco, d:Silvia, d:Diane, d:Wickler ;
+    :name "Martin";
+    :MasterProgram "MSC Modelling Of Neuronal And Cognitive Systems".
+
+
+ d:Yannik rdf:type : :Person, :Student, :Man ;
+    :yearsOld 27;
+    :nationality: "Congo";
+    :hasFriend  d:Aglind, d:Martin;
+    :hasTeacher d:Marco,  d:Paul_HOFMAN, d:Diane, d:Wickler ;
+    :name "Yannik";
+    :MasterProgram "MSC Biobanks & Complex Data Managment";
+    :intershipTeam d:Agros.
+
+
+ 

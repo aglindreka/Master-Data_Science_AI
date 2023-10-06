@@ -1,0 +1,366 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix :     <http://ns.UCA.fr/humans/schema#> . 
+
+: a owl:Ontology ;
+    rdfs:label   "Data Science and Artificial Intelligence" ;
+    rdfs:comment "Schema of the three different masters." ;
+    owl:priorVersion <http://www.UCA.fr/2007/09/11/humans.rdfs#> .
+
+#========================================================#
+#=================== Classes ============================#
+#========================================================#
+:Person a rdfs:Class ;
+    rdfs:label "human"@en, "human being"@en, "person"@en,
+               "homme"@fr, "humain"@fr, "personne"@fr, "être humain"@fr ;
+    rdfs:comment "a member of the human species"@en,
+                 "un membre de l'espèce humaine."@fr .
+
+:Director a rdfs:Class ;
+    rdfs:label "Director"@en, "directeur"@fr ;
+    rdfs:comment "A director of a master's program is a faculty member or administrator who is responsible for overseeing and managing a specific master's degree program within an academic institution."@en,
+                 "Un directeur de programme de maîtrise est un membre du corps professoral ou un administrateur chargé de superviser et de gérer un programme de maîtrise spécifique au sein d'un établissement d'enseignement."@fr ;
+    rdfs:subClassOf :Person .
+
+:Student a rdfs:Class ;
+    rdfs:label "student"@en, "étudiant"@fr ;
+    rdfs:comment "A person that decide to study in a school."@en,
+                 "Une personne qui décide d'étudier dans une école."@fr ;
+    rdfs:subClassOf :Person .
+
+:Professor a rdfs:Class ;
+    rdfs:label "Professor"@en, "Professeur"@fr ;
+    rdfs:comment "A professor of a master's program is a faculty member who teaches and conducts research within a specific area of expertise related to a master's degree program."@en,
+                 "Un professeur d'un programme de maîtrise est un membre du corps professoral qui enseigne et mène des recherches dans un domaine d'expertise spécifique lié à un programme de maîtrise."@fr ;
+    rdfs:subClassOf :Person .
+
+
+
+:Man a rdfs:Class ;
+    rdfs:label "man"@en, "homme"@fr ;
+    rdfs:comment "an adult male person"@en,
+                 "mâle adulte de l'espèce humaine."@fr ;
+    rdfs:subClassOf :Person .
+
+
+:Researcher a rdfs:Class ;
+    rdfs:label "researcher"@en, "scientist"@en, "chercheur"@fr, "scientifique"@fr ;
+    rdfs:comment "a person who devotes himself to doing research"@en,
+                 "personne adonnée à des recherches spécialisées."@fr ;
+    rdfs:subClassOf :Person .
+
+:Woman a rdfs:Class ;
+    rdfs:label "woman"@en, "femme"@fr ;
+    rdfs:comment "an adult female person"@en,
+                 "femelle adulte de l'espèce humaine."@fr ;
+    rdfs:subClassOf :Person .
+
+:Coordinator a rdfs:Class ;
+    rdfs:label "coordinator"@en, "coordinateur"@fr ;
+    rdfs:comment "Master coordinator refer to a person or position that oversees the coordination of multiple projects or initiatives within an organization or company."@en,
+                 "Le coordinateur principal fait référence à une personne ou à un poste qui supervise la coordination de plusieurs projets ou initiatives au sein d'une organisation ou d'une entreprise.."@fr ;
+    rdfs:subClassOf :Person .
+
+:Accountant a rdfs:Class ;
+    rdfs:label "Accountant"@en, "comptable"@fr ;
+    rdfs:comment "Master Accountant refer to a person or position that has to to manage with the fees of the students."@en,
+                 "Maître comptable fait référence à une personne ou à un poste qui doit gérer les frais des étudiants."@fr ;
+    rdfs:subClassOf :Person .
+
+:Administration a rdfs:Class ;
+    rdfs:label "Administration"@en, "gestion"@fr ;
+    rdfs:comment "Master Administrator refer to a person or position that has to to manage with the bureaucratic work."@en,
+                 "Administrateur principal fait référence à une personne ou à un poste qui doit gérer le travail bureaucratique."@fr ;
+    rdfs:subClassOf :Person .
+
+:humanResources a rdfs:Class ;
+    rdfs:label "human resources"@en, "ressources humaines"@fr ;
+    rdfs:comment "human resources refer to a person or position that has to to manage with the bureaucratic employes or with the publicity of the masters."@en,
+                 "les ressources humaines font référence à une personne ou à un poste qui doit gérer avec les employés bureaucratiques ou avec la publicité des maîtres."@fr ;
+    rdfs:subClassOf :Person .
+
+:Library a rdfs:Class ;
+    rdfs:label "library"@en, "biblioteca"@fr ;
+    rdfs:comment "it is a place where people or students can study or read a book."@en,
+                 "c'est un endroit où les gens ou les étudiants peuvent étudier ou lire un livre."@fr .
+
+:Campus a rdfs:Class ;
+    rdfs:label "university campus"@en, "Campus de l'université"@fr ;
+    rdfs:comment "it's a place where students have lessons."@en,
+                 "c'est un endroit où les étudiants ont des cours."@fr .
+
+:TeamResearchGroup a rdfs:Class ;
+    rdfs:label "Team Researchers Group"@en, "Groupe de chercheurs de l'équipe"@fr ;
+    rdfs:comment "The research team."@en,
+                 "L'équipe de recherche."@fr .
+
+
+:LanguageExchange a rdfs:Class ;
+    rdfs:label "Language Exchange"@en, "Échange linguistique"@fr ;
+    rdfs:comment "An activity offered from the university for the students."@en,
+                 "Une activité proposée par l'université pour les étudiants."@fr .
+
+
+#===========================================================#
+#=================== Properties ============================#
+#===========================================================#
+
+:paperPublication a rdf:Property ;
+    rdfs:label "Publication papers"@en, "a pour frère"@fr ;
+    rdfs:comment "How many papers has a professor/researcher has published."@en,
+                 "Combien d'articles un professeur/chercheur a-t-il publiés."@fr ;
+    rdfs:domain :Researcher ;
+    rdfs:range  xsd:Integer .   
+
+:nationality a rdf:Property ;
+    rdfs:label "nationality"@en, "nationalité"@fr ;
+    rdfs:comment "The nationality of a person."@en,
+                 "La nationalité d'une personne."@fr ;
+    rdfs:domain :Person ;
+    rdfs:range  rdf:Literals .
+
+:decideCourseTeachers a rdf:Property ;
+    rdfs:label "Decision course teachers"@en, "Enseignants du cours de décision"@fr ;
+    rdfs:comment "To decise which teacher will teach a particular class."@en,
+                 "Pour décider quel enseignant enseignera une classe particulière."@fr ;
+    rdfs:domain :Director ;
+    rdfs:range :Professor .
+
+:acceptedStudents a rdf:Property ;
+    rdfs:label "students accepted"@en, "étudiants acceptés"@fr ;
+    rdfs:comment "The student that have been accepted to the master."@en,
+                 "L'étudiant qui a été accepté au master."@fr ;
+    rdfs:domain :Director ;
+    rdfs:range  :Student .    
+
+:yearsOld a rdf:Property ;
+    rdfs:label "age"@en, "âge"@fr ;
+    rdfs:comment "The age of a person."@en,
+                 "L'âge d'une personne."@fr ;
+    rdfs:domain :Person ;
+    rdfs:range  xsd:Integer .  
+
+:carrierYears a rdf:Property ;
+    rdfs:label "carrier years"@en, "années de carrière"@fr ;
+    rdfs:comment "years of carrier."@en,
+                 "années de carrière."@fr ;
+    rdfs:domain :Person ;
+    rdfs:range  xsd:Integer .
+
+:courseTeaches a rdf:Property ; ###controll
+    rdfs:label "teaching course"@en, "cours d'enseignement"@fr ;
+    rdfs:comment "The course that a professor teaches."@en,
+                 "Le cours qu'enseigne un professeur."@fr ;
+    rdfs:domain :Director ;
+    rdfs:range  :Professor.
+
+:MasterDirector a rdf:Property ;
+    rdfs:label "The director of the master"@en, "Le directeur du maître"@fr ;
+    rdfs:comment "The person in head of the master."@en,
+                 "La personne en tête du maître."@fr ;
+    rdfs:domain :Person ;
+    rdfs:range  :Director .
+
+:name a rdf:Property ;
+    rdfs:label "name"@en, "nom"@fr ;
+    rdfs:comment "designation of something."@en,
+                 "désignation de quelque chose."@fr ;
+    rdfs:domain :Person ;
+    rdfs:range  rdf:Literals .
+
+:hasDirector a rdf:Property ;
+    rdfs:label "The director of the master"@en, "Le directeur du maître"@fr ;
+    rdfs:comment "The director of the masters coordinator."@en,
+                 "Le directeur du master coordinateur."@fr ;
+    rdfs:domain :Person ;
+    rdfs:range  :Director.
+
+:teacherCoordinator a rdf:Property ;
+    rdfs:label "coordinator of teachers"@en,  "coordinateur des professeurs"@fr ;
+    rdfs:comment "A teacher coordinator is an individual who oversees and coordinates the activities of teachers within an educational institution."@en,
+        "Un coordonnateur des enseignants est une personne qui supervise et coordonne les activités des enseignants au sein d'un établissement d'enseignement."@fr ;
+    rdfs:domain :Person ;
+    rdfs:range  :Coordinator.
+
+:coordinatorMaster3IA a rdf:Property ;
+    rdfs:label "activity coordinator"@en, "coordinateur d'activité"@fr ;
+    rdfs:comment "A person that manages the different activities."@en,
+                 "Une personne qui gère les différentes activités."@fr ;
+    rdfs:range  rdf:Literals .
+
+:masterCountryGratuate a rdf:Property ;
+    rdfs:label "The graduation country"@en, "Le pays du diplôme"@fr ;
+    rdfs:comment "The country where he or she graduated."@en,
+                 "Le pays où il ou elle a obtenu son diplôme."@fr ;
+    rdfs:range  rdf:Literals .
+    
+
+:hasColleague a rdf:Property ; ##correct
+    rdfs:label "has collegues"@en, "a des collègues"@fr ;
+    rdfs:comment "A persons colleagues, that works every day."@en,
+                 "Les collègues d'une personne, qui travaille tous les jours."@fr ;
+    rdfs:domain :Person ;
+    rdfs:range  :Person.
+    
+
+:hasStudent a rdf:Property ;
+    rdfs:label "has students"@en, "a des étudiants"@fr ;
+    rdfs:comment "A professor that has students."@en,
+                 "Un professeur qui a des étudiants."@fr ;
+    rdfs:domain :Person ;
+    rdfs:range  :Student.
+
+:teaches a rdf:Property ;
+    rdfs:label "class teaching"@en, "enseignement en classe"@fr ;
+    rdfs:comment "The class that the professor teaches."@en,
+                 "La classe que le professeur enseigne."@fr ;
+    rdfs:domain :Person ;
+    rdfs:range  rdf:Literals . 
+  
+    
+ :Lab a rdf:Property ;
+    rdfs:label "laboratory research"@en, "recherche en laboratoire"@fr ;
+    rdfs:comment "The laboratory when the researcher does research."@en,
+                 "Le laboratoire quand le chercheur fait de la recherche."@fr ;
+    rdfs:domain :Person ;
+    rdfs:range  rdf:Literals .    
+    
+ :hasFriend a rdf:Property ;
+    rdfs:label "person friends"@en, "personne amis"@fr ;
+    rdfs:comment "A person that has friends, indipendent of his role."@en,
+                 "Une personne qui a des amis, indépendamment de son rôle."@fr ;
+    rdfs:domain :Person ;
+    rdfs:range  :Person.
+    
+:hasTeacher a rdf:Property ;
+    rdfs:label "teacher of student"@en, "professeur d'élève"@fr ;
+    rdfs:comment "Which teachers has a student."@en,
+                 "Quels professeurs ont un élève."@fr ;
+    rdfs:domain  :Student ;
+    rdfs:range   :Professor.
+
+:masterInProgress a rdf:Property ;
+    rdfs:label "Master year"@en, "Année de Master"@fr ;
+    rdfs:comment "Which year of master is the student."@en,
+                 "Quelle année de master est l'étudiant."@fr ;
+    rdfs:domain :Student ;
+    rdfs:range  rdf:Literals .
+
+:masterAccountant a rdf:Property ;
+    rdfs:label "Master accountant"@en, "maître comptable"@fr ;
+    rdfs:comment "Which program of the master the accountatnt is responsable of."@en,
+                 "De quel programme du master le comptable est-il responsable."@fr ;
+    rdfs:domain :Accountant ;
+    rdfs:range  rdf:Literals .
+
+
+:masterAdministration a rdf:Property ;
+    rdfs:label "master administration"@en, "gestion de maître"@fr ;
+    rdfs:comment "The masters that the administrator is responsable of."@en,
+                 "Les maîtres dont l'administrateur est responsable."@fr ;
+    rdfs:domain :Administration ;
+    rdfs:range  rdf:Literals .
+                
+
+
+:campusOfLibrary a rdf:Property ;
+    rdfs:label "library in the campus"@en, "bibliothèque du campus"@fr ;
+    rdfs:comment "In which compus is the library."@en,
+                 "Dans quel campus se trouve la bibliothèque."@fr ;
+    rdfs:domain :Library ;
+    rdfs:range  :Campus . 
+        
+
+
+:studentsPlaces a rdf:Property ;
+    rdfs:label "students places"@en, "étudiants Lieux"@fr ;
+    rdfs:comment "how many places are free for students."@en,
+                 "combien de places sont libres pour les étudiants."@fr ;
+     rdfs:range  xsd:Integer .
+
+:OpeningHours a rdf:Property ;
+    rdfs:label "open hours"@en, "heures d'ouverture"@fr ;
+    rdfs:comment "how many hours per day is open."@en,
+                 "combien d'heures par jour est ouvert."@fr ;
+     rdfs:range  rdf:Literals .
+    
+:activities a rdf:Property ;
+    rdfs:label "activities"@en, "activités"@fr ;
+    rdfs:comment "what activities take place in the library."@en,
+                 "quelles activités ont lieu à la bibliothèque."@fr ;
+    rdfs:range  :Library.
+
+:place a rdf:Property ;
+    rdfs:label "place"@en, "lieu"@fr ;
+    rdfs:comment "The city, the area."@en,
+                 "La ville, le quartier."@fr ;
+    rdfs:range  rdf:Literals .
+    
+:specialization a rdf:Property ;
+    rdfs:label "specialization"@en, "spécialisation"@fr ;
+    rdfs:comment "What does the school specialize in?."@en,
+                 "En quoi l'école est-elle spécialisée ?."@fr ;
+    rdfs:range  rdf:Literals .
+
+
+:nbStudentOnCampus a rdf:Property ;
+    rdfs:label "students number"@en, "numéro d'étudiant"@fr ;
+    rdfs:comment "the number of students in the campus."@en,
+                 "le nombre d'étudiants sur le campus."@fr ;
+    rdfs:range  xsd:Integer.
+
+
+:onTheCampus a rdf:Property ;
+    rdfs:label "library in campus"@en, "bibliothèque sur le campus"@fr ;
+    rdfs:comment "the library that is in the campus."@en,
+                 "la bibliothèque qui se trouve sur le campus."@fr ;
+    rdfs:domain :Library.
+    rdfs:range  :Campus.
+
+:ResearchSubject a rdf:Property ;
+    rdfs:label "Research Subject"@en, "Sujet de recherche"@fr ;
+    rdfs:comment "the subject of the research."@en,
+                 "l'objet de la recherche."@fr ;
+    rdfs:range  rdf:Literals .
+
+:researcherNumber a rdf:Property ;
+    rdfs:label "researcher Number"@en, "chercheur Nombre"@fr ;
+    rdfs:comment "The number of the researchers in the team."@en,
+                 "Le nombre de chercheurs dans l'équipe."@fr ;
+    rdfs:range  xsd:Integer.
+
+:campusPlace a rdf:Property ;
+    rdfs:label "campus place"@en, "Lieu du campus"@fr ;
+    rdfs:comment "In wich campus the team works."@en,
+                 "Dans quel campus l'équipe travaille."@fr ;
+   rdfs:range  :Campus.
+
+:researcherMember a rdf:Property ;
+    rdfs:label "researcher Member"@en, "membre chercheur"@fr ;
+    rdfs:comment "the members of the research team."@en,
+                 "les membres de l'équipe de recherche."@fr ;
+    rdfs:range  :Person.
+                
+
+:intershipStudents a rdf:Property ;
+    rdfs:label "intership students"@en, "stagiaires"@fr ;
+    rdfs:comment "the students that are doing the intership in this team."@en,
+                 "les étudiants qui font le stage dans cette équipe."@fr ;
+    rdfs:range  :Student.
+
+
+:intershipTeam a rdf:Property ;
+    rdfs:label "intership team"@en, "Équipe de stage"@fr ;
+    rdfs:comment "the team that the student is doing the internship."@en,
+                 "l'équipe dans laquelle l'étudiant effectue le stage."@fr ;
+    rdfs:range  :TeamResearchGroup.
+
+
+:activityPlace a rdf:Property ;
+    rdfs:label "activity place"@en, "Lieu d'activité"@fr ;
+    rdfs:comment "Where the activity takes place."@en,
+                 "Où se déroule l'activité."@fr ;
+    rdfs:range  :Library.
+
